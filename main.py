@@ -52,7 +52,8 @@ def pymkm():
         try:
             collection = db.reports
             print(f"count: {collection.count_documents({})}")
-            result = collection.find({"date": {"$lt": date_stop}}, {'_id': False}).sort("date")
+            #result = collection.find({"date": {"$lt": date_stop}}, {'_id': False}).sort("date")
+            result = collection.find({}}, {'_id': False})
             print([x for x in result])
             return jsonify([x for x in result])
         except Exception as err:
