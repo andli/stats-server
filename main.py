@@ -57,7 +57,7 @@ def pymkm():
             
             print(list(result))
             #return jsonify(list(result))
-            return jsonify({'test': '123'})
+            return jsonify([{'test': '123'}])
         except Exception as err:
             resp = jsonify(success=False)
             print(err)
