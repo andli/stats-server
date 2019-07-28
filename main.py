@@ -51,7 +51,8 @@ def pymkm():
         date_stop = datetime.now() - delta
         try:
             collection = db.reports
-            return jsonify(collection.find({"date": {"$lt": date_stop}}).sort("date"))
+            result = collection.find({"date": {"$lt": date_stop}}).sort("date")
+            return jsonify([doc for doc in result])
         except Exception as err:
             resp = jsonify(success=False)
             print(err)
