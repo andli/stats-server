@@ -46,8 +46,8 @@ def pymkm():
 
         return resp
     elif request.method == 'GET':
-        delta = datetime.timedelta(days = 14)
-        date_stop = datetime.datetime.now() - delta
+        delta = timedelta(days = 14)
+        date_stop = datetime.now() - delta
         try:
             collection = db.reports
             return collection.find({"date": {"$lt": date_stop}}).sort("date")
