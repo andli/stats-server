@@ -9,7 +9,7 @@ __version__ = "0.1.0"
 __license__ = "MIT"
 
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import Flask
 from flask import request
@@ -20,6 +20,7 @@ app = Flask(__name__)
 mdb_client = MongoClient(os.environ.get('MONGODB_URI', None))
 db_name = os.environ.get('MONGODB_URI', None).rsplit('/', 1)[-1]
 db = mdb_client[db_name]
+
 
 @app.route('/pymkm', methods=['GET', 'POST'])
 def pymkm():
@@ -46,7 +47,7 @@ def pymkm():
 
         return resp
     elif request.method == 'GET':
-        delta = timedelta(days = 14)
+        delta = timedelta(days=14)
         date_stop = datetime.now() - delta
         try:
             collection = db.reports
