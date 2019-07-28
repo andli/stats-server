@@ -19,28 +19,38 @@ from pymongo import MongoClient
 app = Flask(__name__)
 mdb_client = MongoClient(os.environ.get('MONGODB_URI', None))
 db_name = os.environ.get('MONGODB_URI', None).rsplit('/', 1)[-1]
+db = mdb_client[db_name]
 
-@app.route('/pymkm', methods=['POST'])
+@app.route('/pymkm', methods=['GET', 'POST'])
 def pymkm():
-    json_data = request.get_json()
-    if 'version' in json_data and 'command' in json_data:
-        data = {
-            'date': datetime.utcnow(),
-            'version': json_data['version'],
-            'command': json_data['command']
-        }
+    if request.method == 'POST':
+        json_data = request.get_json()
+        if 'version' in json_data and 'command' in json_data:
+            data = {
+                'date': datetime.utcnow(),
+                'version': json_data['version'],
+                'command': json_data['command']
+            }
 
-        # store data row
+            # store data row
+            try:
+                collection = db.reports
+                collection.insert_one(data)
+            except Exception as err:
+                resp = jsonify(success=False)
+                print(err)
+            else:
+                resp = jsonify(success=True)
+        else:
+            resp = jsonify(success=False)
+
+        return resp
+    elif request.method == 'GET':
+        delta = datetime.timedelta(days = 14)
+        date_stop = datetime.datetime.now() - delta
         try:
-            db = mdb_client[db_name]
             collection = db.reports
-            collection.insert_one(data)
+            return collection.find({"date": {"$lt": date_stop}}).sort("date")
         except Exception as err:
             resp = jsonify(success=False)
             print(err)
-        else:
-            resp = jsonify(success=True)
-    else:
-        resp = jsonify(success=False)
-
-    return resp
