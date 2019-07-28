@@ -55,7 +55,7 @@ def pymkm():
             #result = collection.find({"date": {"$lt": date_stop}}, {'_id': False}).sort("date")
             result = collection.find({}, {'_id': False})
             print(list(result))
-            return jsonify(list(result)
+            return jsonify(list(result))
         except Exception as err:
             resp = jsonify(success=False)
             print(err)
