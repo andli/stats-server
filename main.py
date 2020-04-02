@@ -17,7 +17,7 @@ from flask import jsonify
 from pymongo import MongoClient
 
 app = Flask(__name__)
-mdb_client = MongoClient(os.environ.get('MONGODB_URI', None))
+mdb_client = MongoClient(os.environ.get('MONGODB_URI', None, retryWrites=False))
 db_name = os.environ.get('MONGODB_URI', None).rsplit('/', 1)[-1]
 db = mdb_client[db_name]
 
