@@ -30,6 +30,7 @@ def pymkm():
             data = {
                 'date': datetime.utcnow(),
                 'version': json_data['version'],
+                'uuid': json_data['uuid'],
                 'command': json_data['command']
             }
 
