@@ -47,7 +47,7 @@ def pymkm():
 
         return resp
     elif request.method == 'GET':
-        delta = timedelta(days=99)
+        delta = timedelta(days=365)
         date_stop = datetime.now() - delta
         try:
             collection = db.reports
