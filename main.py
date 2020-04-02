@@ -5,7 +5,7 @@ This is a web server for collecting stats.
 """
 
 __author__ = "Andreas Ehrlund"
-__version__ = "0.1.0"
+__version__ = "0.1.9"
 __license__ = "MIT"
 
 import os
@@ -26,6 +26,7 @@ db = mdb_client[db_name]
 def pymkm():
     if request.method == 'POST':
         json_data = request.get_json()
+        print(json_data)
         if 'version' in json_data and 'command' in json_data:
             data = {
                 'date': datetime.utcnow(),
