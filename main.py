@@ -38,6 +38,8 @@ def pymkm():
     if request.method == "POST":
         json_data = request.get_json()
         geolocation_data = geolocate_ip(request.remote_addr)
+        print("hej")
+        print(geolocation_data)
 
         if "version" in json_data and "command" in json_data:
 
