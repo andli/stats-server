@@ -24,8 +24,9 @@ db = mdb_client[db_name]
 
 
 def geolocate_ip(ip_addr):
+    api_key = os.environ.get("IPSTACK_API_KEY", None)
     try:
-        r = requests.get(f"http://api.ipstack.com/{ip_addr}?access_key={os.environ.get("IPSTACK_API_KEY", None)}")
+        r = requests.get(f"http://api.ipstack.com/{ip_addr}?access_key={api_key}")
         return r.json()
     except Exception as e:
         print(e.args)
@@ -47,7 +48,7 @@ def pymkm():
                 "ip": request.remote_addr,
                 "lat": geolocation_data.latitude,
                 "long": geolocation_data.longitude,
-                "country": geolocation_data.coutry
+                "country": geolocation_data.coutry,
             }
 
             # store data row
