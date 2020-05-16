@@ -39,7 +39,8 @@ def pymkm():
         json_data = request.get_json()
         geolocation_data = geolocate_ip(request.remote_addr)
         print("hej")
-        print(request.environ.get("HTTP_X_REAL_IP", request.remote_addr))
+        # print(request.environ.get("HTTP_X_REAL_IP", request.remote_addr))
+        print(request.environ)
 
         if "version" in json_data and "command" in json_data:
 
