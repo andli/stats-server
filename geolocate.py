@@ -14,5 +14,5 @@ def geolocate_ip(ip_addr):
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
-    stuff = geolocate_ip("98.128.228.189")
+    stuff = geolocate_ip("98.128.228.189")["latitude"]
     print(stuff)
