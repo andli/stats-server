@@ -42,6 +42,8 @@ def pymkm():
             latitude = geolocation_data["latitude"]
             longitude = geolocation_data["longitude"]
             country = geolocation_data["country"]
+        except Exception as e:
+            pass
 
         if "version" in json_data and "command" in json_data:
 
