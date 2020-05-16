@@ -32,7 +32,8 @@ def pymkm():
                 'date': datetime.utcnow(),
                 'version': json_data['version'],
                 'uuid': json_data['uuid'],
-                'command': json_data['command']
+                'command': json_data['command'],
+                'ip': request.remote_addr
             }
 
             # store data row
