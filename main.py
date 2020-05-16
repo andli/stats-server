@@ -38,14 +38,6 @@ def pymkm():
     if request.method == "POST":
         json_data = request.get_json()
         geolocation_data = geolocate_ip(request.remote_addr)
-        try:
-            geo_data = {
-                "lat": geolocation_data["latitude"],
-                "long": geolocation_data["longitude"],
-                "country": geolocation_data["country"],
-            }
-        except Exception as e:
-            pass
 
         if "version" in json_data and "command" in json_data:
 
@@ -57,8 +49,15 @@ def pymkm():
                 "ip": request.remote_addr,
             }
 
-            if all(geo_data):
+            try:
+                geo_data = {
+                    "lat": geolocation_data["latitude"],
+                    "long": geolocation_data["longitude"],
+                    "country": geolocation_data["country"],
+                }
                 data.update(geo_data)
+            except Exception as e:
+                pass
 
             # store data row
             try:
