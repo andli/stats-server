@@ -57,7 +57,7 @@ def pymkm():
                 geo_data = {
                     "lat": geolocation_data["latitude"],
                     "long": geolocation_data["longitude"],
-                    "country": geolocation_data["country"],
+                    "country_code": geolocation_data["country_code"],
                 }
                 data.update(geo_data)
             except Exception as e:
