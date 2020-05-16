@@ -37,10 +37,9 @@ def geolocate_ip(ip_addr):
 def pymkm():
     if request.method == "POST":
         json_data = request.get_json()
-        geolocation_data = geolocate_ip(request.remote_addr)
-        print("hej")
-        # print(request.environ.get("HTTP_X_REAL_IP", request.remote_addr))
-        print(request.environ)
+        geolocation_data = geolocate_ip(
+            request.environ.get("HTTP_X_FORWARDED_FOR", request.remote_addr)
+        )
 
         if "version" in json_data and "command" in json_data:
 
