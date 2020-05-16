@@ -46,9 +46,9 @@ def pymkm():
                 "uuid": json_data["uuid"],
                 "command": json_data["command"],
                 "ip": request.remote_addr,
-                "lat": geolocation_data.['latitude'],
-                "long": geolocation_data.['longitude'],
-                "country": geolocation_data.['coutry'],
+                "lat": geolocation_data["latitude"],
+                "long": geolocation_data["longitude"],
+                "country": geolocation_data["coutry"],
             }
 
             # store data row
